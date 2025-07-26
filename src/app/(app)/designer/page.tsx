@@ -5,7 +5,9 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 import { Cog, Database, Server, Settings, UploadCloud } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { db } from "@/lib/firebase"
+import { collection, onSnapshot, doc, setDoc, addDoc } from "firebase/firestore"
 
 const resources = [
   { name: "Compute", icon: Server },
@@ -14,25 +16,54 @@ const resources = [
   { name: "Config", icon: Settings },
 ]
 
-type SelectedComponent = {
-  id: number
+type ComponentProperties = {
+  instanceSize: string;
+  region: string;
+  version?: string;
+}
+
+type Component = {
+  id: string
   name: string
   type: string
-  properties: {
-    instanceSize: string,
-    region: string,
-    version?: string
-  }
-} | null
-
-const initialComponents = [
-    { id: 1, name: "WebApp Server", type: "Compute", properties: { instanceSize: "e2-medium", region: "us-central1" } },
-    { id: 2, name: "Primary DB", type: "Database", properties: { instanceSize: "db-n1-standard-1", region: "us-central1", version: "MySQL 8.0" } }
-]
+  properties: ComponentProperties
+}
 
 export default function DesignerPage() {
-  const [selected, setSelected] = useState<SelectedComponent>(initialComponents[0])
+  const [components, setComponents] = useState<Component[]>([])
+  const [selected, setSelected] = useState<Component | null>(null)
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "components"), (snapshot) => {
+      const componentsData: Component[] = []
+      snapshot.forEach((doc) => {
+        componentsData.push({ id: doc.id, ...doc.data() } as Component)
+      });
+      setComponents(componentsData);
+      if (componentsData.length > 0 && !selected) {
+        setSelected(componentsData[0]);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [selected]);
   
+  const handlePropertyChange = (prop: keyof ComponentProperties, value: string) => {
+      if (selected) {
+          const newSelected = {
+              ...selected,
+              properties: {
+                  ...selected.properties,
+                  [prop]: value
+              }
+          };
+          setSelected(newSelected);
+          
+          const docRef = doc(db, "components", selected.id);
+          setDoc(docRef, newSelected, { merge: true });
+      }
+  }
+
   return (
     <div className="grid h-full min-h-[calc(100vh-8rem)] grid-cols-1 gap-6 lg:grid-cols-[280px_1fr] xl:grid-cols-[280px_1fr_320px]">
       <Card className="flex flex-col">
@@ -65,7 +96,7 @@ export default function DesignerPage() {
             <div className="relative h-full w-full rounded-lg border-2 border-dashed border-muted-foreground/30 bg-muted/20 p-6">
                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(128,128,128,0.1)_0%,_transparent_50%)] bg-[length:2rem_2rem]"></div>
                  <div className="relative grid grid-cols-2 gap-8">
-                     {initialComponents.map(comp => (
+                     {components.map(comp => (
                          <div key={comp.id} onClick={() => setSelected(comp)}
                               className={cn("p-4 rounded-lg border bg-card cursor-pointer transition-all",
                               selected?.id === comp.id ? "border-primary shadow-lg scale-105" : "hover:border-primary/50 hover:shadow-md")}>
@@ -96,7 +127,7 @@ export default function DesignerPage() {
             <>
               <div className="space-y-2">
                 <Label htmlFor="name">Component Name</Label>
-                <Input id="name" value={selected.name} />
+                <Input id="name" value={selected.name} onChange={(e) => setSelected({...selected, name: e.target.value})} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="type">Component Type</Label>
@@ -104,15 +135,15 @@ export default function DesignerPage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="instance">Instance Size</Label>
-                <Input id="instance" value={selected.properties.instanceSize} />
+                <Input id="instance" value={selected.properties.instanceSize} onChange={(e) => handlePropertyChange('instanceSize', e.target.value)} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="region">Region</Label>
-                <Input id="region" value={selected.properties.region} />
+                <Input id="region" value={selected.properties.region} onChange={(e) => handlePropertyChange('region', e.target.value)} />
               </div>
                {selected.properties.version && <div className="space-y-2">
                 <Label htmlFor="version">Version</Label>
-                <Input id="version" value={selected.properties.version} />
+                <Input id="version" value={selected.properties.version} onChange={(e) => handlePropertyChange('version', e.target.value)} />
               </div>}
             </>
           ) : (
