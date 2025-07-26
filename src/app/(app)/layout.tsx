@@ -38,7 +38,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <SidebarContent>
           <SidebarMenu>
             <SidebarMenuItem>
-              <Link href="/page" passHref legacyBehavior>
+              <Link href="/page">
                 <SidebarMenuButton
                   isActive={isActive('/page')}
                   tooltip="Dashboard"
@@ -49,7 +49,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <Link href="/designer" passHref legacyBehavior>
+              <Link href="/designer">
                 <SidebarMenuButton
                   isActive={isActive('/designer')}
                   tooltip="Blueprint Designer"
@@ -60,7 +60,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <Link href="/visualizer" passHref legacyBehavior>
+              <Link href="/visualizer">
                 <SidebarMenuButton
                   isActive={isActive('/visualizer')}
                   tooltip="Dependency Visualizer"
@@ -71,7 +71,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <Link href="/recommendations" passHref legacyBehavior>
+              <Link href="/recommendations">
                 <SidebarMenuButton
                   isActive={isActive('/recommendations')}
                   tooltip="AI Recommendations"
@@ -82,7 +82,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <Link href="/monitoring" passHref legacyBehavior>
+              <Link href="/monitoring">
                 <SidebarMenuButton
                   isActive={isActive('/monitoring')}
                   tooltip="Logs & Monitoring"
@@ -93,7 +93,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <Link href="/chatops" passHref legacyBehavior>
+              <Link href="/chatops">
                 <SidebarMenuButton
                   isActive={isActive('/chatops')}
                   tooltip="ChatOps"

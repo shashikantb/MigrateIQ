@@ -43,13 +43,13 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Link href="/page" legacyBehavior passHref>
+                  <Link href="/page">
                     <Button size="lg">
                       Start Migration
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>
-                   <Link href="/page" legacyBehavior passHref>
+                   <Link href="/page">
                     <Button size="lg" variant="secondary">
                       View Projects
                     </Button>
