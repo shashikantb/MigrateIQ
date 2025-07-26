@@ -1,0 +1,39 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+export default function AboutPage() {
+  return (
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle className="font-headline">About MigrateIQ</CardTitle>
+          <CardDescription>
+            Innovating cloud migration with AI-powered automation.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <p className="text-muted-foreground">
+            MigrateIQ was founded with a simple mission: to make cloud migration seamless, intelligent, and accessible for businesses of all sizes. We leverage cutting-edge AI to analyze your existing infrastructure, generate optimal migration blueprints, and automate complex processes, minimizing risk and accelerating your journey to the cloud. Our platform is built on the principles of precision, efficiency, and security, ensuring a successful migration every time.
+          </p>
+
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold font-headline">Our Founder</h3>
+            <div className="flex items-center gap-4">
+               <Avatar className="h-24 w-24">
+                <AvatarImage src="https://placehold.co/400x400.png" data-ai-hint="man portrait" alt="Shashikant Pradip Borgavakar" />
+                <AvatarFallback>SPB</AvatarFallback>
+              </Avatar>
+              <div>
+                <h4 className="font-bold text-lg">Shashikant Pradip Borgavakar</h4>
+                <p className="text-muted-foreground">Founder & CEO</p>
+                <p className="mt-2 text-sm">
+                  With over two decades of experience in enterprise architecture and cloud solutions, Shashikant is a visionary leader passionate about solving complex technological challenges. His expertise drives the innovation at the core of MigrateIQ.
+                </p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

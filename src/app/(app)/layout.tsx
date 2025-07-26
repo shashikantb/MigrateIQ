@@ -19,6 +19,8 @@ import {
   Activity,
   Terminal,
   LogOut,
+  Users,
+  Mail,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -102,6 +104,28 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   icon={<Terminal />}
                 >
                   ChatOps Interface
+                </SidebarMenuButton>
+              </Link>
+            </SidebarMenuItem>
+             <SidebarMenuItem>
+              <Link href="/about">
+                <SidebarMenuButton
+                  isActive={isActive('/about')}
+                  tooltip="About Us"
+                  icon={<Users />}
+                >
+                  About Us
+                </SidebarMenuButton>
+              </Link>
+            </SidebarMenuItem>
+             <SidebarMenuItem>
+              <Link href="/contact">
+                <SidebarMenuButton
+                  isActive={isActive('/contact')}
+                  tooltip="Contact Us"
+                  icon={<Mail />}
+                >
+                  Contact Us
                 </SidebarMenuButton>
               </Link>
             </SidebarMenuItem>
