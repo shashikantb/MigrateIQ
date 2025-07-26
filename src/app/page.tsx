@@ -25,8 +25,8 @@ export default function Home() {
                 <path d="M3 13a1 1 0 00-1 1v2a1 1 0 001 1h1"></path>
                 <path d="m19 15-3 3 3 3"></path>
             </svg>
-            <span className="sr-only">MigrateQ</span>
-            <span className="ml-2 text-lg font-bold">MigrateQ</span>
+            <span className="sr-only">MigrateIQ</span>
+            <span className="ml-2 text-lg font-bold">MigrateIQ</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
           <Link href="/login" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
@@ -44,7 +44,7 @@ export default function Home() {
                     Automate Your Cloud Migration with Confidence
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    MigrateQ analyzes your existing infrastructure and provides an automated, AI-powered pathway to the cloud, minimizing risk and downtime.
+                    MigrateIQ analyzes your existing infrastructure and provides an automated, AI-powered pathway to the cloud, minimizing risk and downtime.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">

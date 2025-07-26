@@ -16,12 +16,12 @@ const commandResponses: { [key: string]: string } = {
   "status appY": "appY: Status - Completed. Migration finished successfully.",
   "suggest fix appX": "Suggestion: The 'auth-service' connection is timing out. Consider increasing the timeout or checking firewall rules.",
   "suggest fix appY": "No issues detected for appY.",
-  "help": "Available commands: /MigrateQ status <app_name>, /MigrateQ suggest fix <app_name>"
+  "help": "Available commands: /MigrateIQ status <app_name>, /MigrateIQ suggest fix <app_name>"
 };
 
 export default function ChatOpsPage() {
   const [messages, setMessages] = useState<Message[]>([
-    { type: "response", text: "Welcome to MigrateQ ChatOps. Type `/MigrateQ help` for commands." },
+    { type: "response", text: "Welcome to MigrateIQ ChatOps. Type `/MigrateIQ help` for commands." },
   ])
   const [input, setInput] = useState("")
   const scrollAreaRef = useRef<HTMLDivElement>(null)
@@ -29,8 +29,8 @@ export default function ChatOpsPage() {
   const handleCommand = (command: string) => {
     const newMessages: Message[] = [...messages, { type: "command", text: command }]
     
-    const normalizedCommand = command.replace(/^\/MigrateQ\s+/, '').trim();
-    const response = commandResponses[normalizedCommand] || `Error: Command not found '${normalizedCommand}'. Type '/MigrateQ help'.`
+    const normalizedCommand = command.replace(/^\/MigrateIQ\s+/, '').trim();
+    const response = commandResponses[normalizedCommand] || `Error: Command not found '${normalizedCommand}'. Type '/MigrateIQ help'.`
 
     newMessages.push({ type: "response", text: response })
     setMessages(newMessages)
@@ -85,7 +85,7 @@ export default function ChatOpsPage() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Type a command... e.g., /MigrateQ status appX"
+            placeholder="Type a command... e.g., /MigrateIQ status appX"
             className="font-mono"
           />
         </div>
