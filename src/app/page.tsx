@@ -28,6 +28,11 @@ export default function Home() {
             <span className="sr-only">MigrateQ</span>
             <span className="ml-2 text-lg font-bold">MigrateQ</span>
         </Link>
+        <nav className="ml-auto flex gap-4 sm:gap-6">
+          <Link href="/login" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            Login
+          </Link>
+        </nav>
       </header>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
@@ -43,7 +48,7 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Link href="/page">
+                  <Link href="/login">
                     <Button size="lg">
                       Start Migration
                       <ArrowRight className="ml-2 h-4 w-4" />

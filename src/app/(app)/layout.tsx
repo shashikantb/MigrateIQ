@@ -18,9 +18,11 @@ import {
   Lightbulb,
   Activity,
   Terminal,
+  LogOut,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { Button } from "@/components/ui/button"
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -105,6 +107,13 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarContent>
+        <SidebarHeader className="mt-auto">
+           <Link href="/login">
+            <SidebarMenuButton icon={<LogOut />}>
+              Logout
+            </SidebarMenuButton>
+           </Link>
+        </SidebarHeader>
       </Sidebar>
       <SidebarInset>
         <header className="flex items-center p-4 border-b">
