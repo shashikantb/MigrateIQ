@@ -2,11 +2,11 @@
 "use client"
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
-import { doc, onSnapshot } from 'firebase/firestore'
+import { doc, onSnapshot, DocumentData } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Code, Copy, Terminal, ToyBrick } from 'lucide-react'
+import { Code, Copy, HardDrive, Server, Terminal, ToyBrick } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
 import Link from 'next/link'
@@ -18,6 +18,15 @@ type Project = {
   target: string;
   org: string;
 };
+
+type DiscoveryData = {
+  os: string;
+  services: string[];
+  dependencies: string[];
+  db: string;
+  scannedAt: { toDate: () => Date };
+} & DocumentData;
+
 
 const getStatusVariant = (status: string) => {
   switch (status) {
@@ -49,21 +58,31 @@ export default function ProjectPage() {
   const params = useParams()
   const projectId = params.id as string
   const [project, setProject] = useState<Project | null>(null)
+  const [discoveryData, setDiscoveryData] = useState<DiscoveryData | null>(null);
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     if (projectId) {
-      const docRef = doc(db, 'projects', projectId)
-      const unsubscribe = onSnapshot(docRef, (doc) => {
+      const unsubProject = onSnapshot(doc(db, 'projects', projectId), (doc) => {
         if (doc.exists()) {
           setProject({ id: doc.id, ...doc.data() } as Project)
         } else {
           setError('Project not found.')
         }
         setLoading(false)
-      })
-      return () => unsubscribe()
+      });
+
+      const unsubDiscovery = onSnapshot(doc(db, `projects/${projectId}/discovery/scan`), (doc) => {
+          if (doc.exists()) {
+            setDiscoveryData(doc.data() as DiscoveryData);
+          }
+      });
+      
+      return () => {
+        unsubProject();
+        unsubDiscovery();
+      }
     }
   }, [projectId])
 
@@ -79,7 +98,7 @@ export default function ProjectPage() {
     return null;
   }
 
-  const apiToken = `mig-token-${projectId.substring(0, 8)}...`;
+  const apiToken = `mig-token-${project.id}`;
   const cliCommand = `pip install migrateiq-agent\n\nmigrateiq-agent init --token ${apiToken}`;
   const dockerCommand = `docker run -it migrateiq/agent \\\n  --token ${apiToken} \\\n  --project-id ${project.id}`;
 
@@ -102,34 +121,63 @@ export default function ProjectPage() {
           </div>
         </CardHeader>
       </Card>
+      
+      {discoveryData ? (
+          <Card>
+              <CardHeader>
+                <CardTitle className="font-headline flex items-center gap-2">
+                    <HardDrive />
+                    Discovered Infrastructure
+                </CardTitle>
+                <CardDescription>
+                    The following details were scanned from your source environment on {discoveryData.scannedAt.toDate().toLocaleString()}.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                  <div className="grid gap-2 rounded-md border p-4">
+                      <h4 className="font-semibold flex items-center gap-2"><Server /> Operating System</h4>
+                      <p className="text-muted-foreground">{discoveryData.os}</p>
+                      
+                      <h4 className="font-semibold flex items-center gap-2 mt-4"><Code /> Services & Dependencies</h4>
+                      <div className="flex flex-wrap gap-2">
+                          {[...discoveryData.services, ...discoveryData.dependencies].map(s => <Badge key={s} variant="secondary">{s}</Badge>)}
+                      </div>
+                      
+                      <h4 className="font-semibold flex items-center gap-2 mt-4"><ToyBrick /> Database</h4>
+                      <p className="text-muted-foreground">{discoveryData.db}</p>
+                  </div>
+              </CardContent>
+          </Card>
+      ) : (
+        <Card>
+            <CardHeader>
+                <CardTitle className="font-headline flex items-center gap-2">
+                    <Terminal />
+                    Connect Your Infrastructure
+                </CardTitle>
+                <CardDescription>
+                    Run the discovery agent on your source server to scan and link your infrastructure.
+                </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+                <div className="space-y-2">
+                    <h3 className="font-semibold flex items-center gap-2"><Code /> Option A: Install Agent CLI</h3>
+                    <p className="text-sm text-muted-foreground">
+                        Install the agent using pip and initialize it with your project's unique API token.
+                    </p>
+                    <CodeBlock command={cliCommand}/>
+                </div>
+                <div className="space-y-2">
+                    <h3 className="font-semibold flex items-center gap-2"><ToyBrick /> Option B: Run Docker Agent</h3>
+                    <p className="text-sm text-muted-foreground">
+                        If you have Docker installed, you can run the agent in a container.
+                    </p>
+                    <CodeBlock command={dockerCommand} />
+                </div>
+            </CardContent>
+        </Card>
+      )}
 
-      <Card>
-          <CardHeader>
-            <CardTitle className="font-headline flex items-center gap-2">
-                <Terminal />
-                Connect Your Infrastructure
-            </CardTitle>
-            <CardDescription>
-                Run the discovery agent on your source server to scan and link your infrastructure.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-              <div className="space-y-2">
-                <h3 className="font-semibold flex items-center gap-2"><Code /> Option A: Install Agent CLI</h3>
-                <p className="text-sm text-muted-foreground">
-                    Install the agent using pip and initialize it with your project's unique API token.
-                </p>
-                <CodeBlock command={cliCommand}/>
-              </div>
-              <div className="space-y-2">
-                <h3 className="font-semibold flex items-center gap-2"><ToyBrick /> Option B: Run Docker Agent</h3>
-                 <p className="text-sm text-muted-foreground">
-                    If you have Docker installed, you can run the agent in a container.
-                </p>
-                <CodeBlock command={dockerCommand} />
-              </div>
-          </CardContent>
-      </Card>
        <Card>
         <CardHeader>
             <CardTitle>Next Steps</CardTitle>
