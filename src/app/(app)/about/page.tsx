@@ -17,18 +17,33 @@ export default function AboutPage() {
           </p>
 
           <div className="space-y-4">
-            <h3 className="text-xl font-semibold font-headline">Our Founder</h3>
-            <div className="flex items-center gap-4">
-               <Avatar className="h-24 w-24">
-                <AvatarImage src="https://placehold.co/400x400.png" data-ai-hint="man portrait" alt="Shashikant Pradip Borgavakar" />
-                <AvatarFallback>SPB</AvatarFallback>
-              </Avatar>
-              <div>
-                <h4 className="font-bold text-lg">Shashikant Pradip Borgavakar</h4>
-                <p className="text-muted-foreground">Founder & CEO</p>
-                <p className="mt-2 text-sm">
-                  With over two decades of experience in enterprise architecture and cloud solutions, Shashikant is a visionary leader passionate about solving complex technological challenges. His expertise drives the innovation at the core of MigrateIQ.
-                </p>
+            <h3 className="text-xl font-semibold font-headline">Our Founders</h3>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="flex items-start gap-4">
+                <Avatar className="h-24 w-24">
+                  <AvatarImage src="https://placehold.co/400x400.png" data-ai-hint="man portrait" alt="Shashikant Pradip Borgavakar" />
+                  <AvatarFallback>SPB</AvatarFallback>
+                </Avatar>
+                <div>
+                  <h4 className="font-bold text-lg">Shashikant Pradip Borgavakar</h4>
+                  <p className="text-muted-foreground">Founder & CEO</p>
+                  <p className="mt-2 text-sm">
+                    With over two decades of experience in enterprise architecture and cloud solutions, Shashikant is a visionary leader passionate about solving complex technological challenges. His expertise drives the innovation at the core of MigrateIQ.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <Avatar className="h-24 w-24">
+                  <AvatarImage src="https://placehold.co/400x400.png" data-ai-hint="man portrait" alt="Akshay Ghadge" />
+                  <AvatarFallback>AG</AvatarFallback>
+                </Avatar>
+                <div>
+                  <h4 className="font-bold text-lg">Akshay Ghadge</h4>
+                  <p className="text-muted-foreground">Co-Founder & CTO</p>
+                  <p className="mt-2 text-sm">
+                    Akshay is a technology enthusiast with a deep expertise in modern application development and cloud infrastructure. He is the architect behind MigrateIQ's robust and scalable platform, ensuring technical excellence and innovation.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
