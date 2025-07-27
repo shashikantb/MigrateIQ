@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { MoreHorizontal, Play, RotateCcw, View, PlusCircle } from "lucide-react"
+import Link from "next/link"
 
 type Project = {
   id: string;
@@ -188,7 +189,11 @@ export default function DashboardPage() {
               ) : projects.length > 0 ? (
                  projects.map((project) => (
                     <TableRow key={project.id}>
-                    <TableCell className="font-medium">{project.projectName}</TableCell>
+                    <TableCell className="font-medium">
+                       <Link href={`/project/${project.id}`} className="hover:underline">
+                         {project.projectName}
+                       </Link>
+                    </TableCell>
                     <TableCell>
                         <Badge variant={getStatusVariant(project.status) as any}>{project.status}</Badge>
                     </TableCell>
@@ -203,9 +208,11 @@ export default function DashboardPage() {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuItem>
-                            <View className="mr-2 h-4 w-4" />
-                            View
+                            <DropdownMenuItem asChild>
+                                <Link href={`/project/${project.id}`}>
+                                    <View className="mr-2 h-4 w-4" />
+                                    View
+                                </Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                             <Play className="mr-2 h-4 w-4" />
