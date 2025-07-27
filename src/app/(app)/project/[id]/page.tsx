@@ -111,7 +111,7 @@ export default function ProjectPage() {
             <CardDescription>
                 Run the discovery agent on your source server to scan and link your infrastructure.
             </CardDescription>
-          </CardHeader>
+          </Header>
           <CardContent className="space-y-6">
               <div className="space-y-2">
                 <h3 className="font-semibold flex items-center gap-2"><Code /> Option A: Install Agent CLI</h3>
