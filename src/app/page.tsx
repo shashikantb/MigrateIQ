@@ -29,6 +29,12 @@ export default function Home() {
             <span className="ml-2 text-lg font-bold">MigrateIQ</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
+          <Link href="/about" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            About Us
+          </Link>
+          <Link href="/contact" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            Contact Us
+          </Link>
           <Link href="/login" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Login
           </Link>

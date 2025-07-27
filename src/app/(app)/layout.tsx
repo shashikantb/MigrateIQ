@@ -107,28 +107,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 </SidebarMenuButton>
               </Link>
             </SidebarMenuItem>
-             <SidebarMenuItem>
-              <Link href="/about">
-                <SidebarMenuButton
-                  isActive={isActive('/about')}
-                  tooltip="About Us"
-                  icon={<Users />}
-                >
-                  About Us
-                </SidebarMenuButton>
-              </Link>
-            </SidebarMenuItem>
-             <SidebarMenuItem>
-              <Link href="/contact">
-                <SidebarMenuButton
-                  isActive={isActive('/contact')}
-                  tooltip="Contact Us"
-                  icon={<Mail />}
-                >
-                  Contact Us
-                </SidebarMenuButton>
-              </Link>
-            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarContent>
         <SidebarHeader className="mt-auto">
