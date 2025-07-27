@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import Image from "next/image";
 
 export default function AboutPage() {
   return (
@@ -22,7 +23,9 @@ export default function AboutPage() {
               <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 <div className="flex flex-col items-center text-center gap-4">
                   <Avatar className="h-32 w-32">
-                    <AvatarImage src="/images/shashikant.png" alt="Shashikant Pradip Borgavakar" />
+                    <AvatarImage asChild>
+                      <Image src="/images/shashikant.png" alt="Shashikant Pradip Borgavakar" width={128} height={128} />
+                    </AvatarImage>
                     <AvatarFallback>SPB</AvatarFallback>
                   </Avatar>
                   <div>
@@ -35,7 +38,9 @@ export default function AboutPage() {
                 </div>
                 <div className="flex flex-col items-center text-center gap-4">
                   <Avatar className="h-32 w-32">
-                    <AvatarImage src="/images/akshay.png" alt="Akshay Ghadge" />
+                    <AvatarImage asChild>
+                      <Image src="/images/akshay.png" alt="Akshay Ghadge" width={128} height={128} />
+                    </AvatarImage>
                     <AvatarFallback>AG</AvatarFallback>
                   </Avatar>
                   <div>
@@ -48,7 +53,9 @@ export default function AboutPage() {
                 </div>
                 <div className="flex flex-col items-center text-center gap-4">
                   <Avatar className="h-32 w-32">
-                    <AvatarImage src="/images/ayon.png" alt="Ayon Sarkar" />
+                     <AvatarImage asChild>
+                      <Image src="/images/ayon.png" alt="Ayon Sarkar" width={128} height={128} />
+                    </AvatarImage>
                     <AvatarFallback>AS</AvatarFallback>
                   </Avatar>
                   <div>
