@@ -12,30 +12,34 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from 'next/navigation'
-import PublicLayout from "../(public)/layout";
+import PublicLayout from "../layout";
 import { useAuth } from "@/hooks/use-auth";
 import { useState } from "react";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 
-export default function LoginPage() {
+export default function SignupPage() {
   const router = useRouter()
-  const { login } = useAuth();
+  const { signup } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await login(email, password);
+      await signup(email, password);
+      toast({
+        title: "Account Created",
+        description: "You have been successfully signed up.",
+      });
       router.push('/dashboard');
     } catch (error: any) {
-      toast({
+       toast({
         variant: "destructive",
-        title: "Login Failed",
+        title: "Signup Failed",
         description: error.message,
       });
       setLoading(false);
@@ -47,12 +51,12 @@ export default function LoginPage() {
         <div className="flex items-center justify-center min-h-[calc(100vh-3.5rem)] bg-background">
         <Card className="w-full max-w-sm">
             <CardHeader>
-            <CardTitle className="text-2xl font-headline">Login</CardTitle>
+            <CardTitle className="text-2xl font-headline">Sign Up</CardTitle>
             <CardDescription>
-                Enter your email below to login to your account.
+                Enter your information to create an account.
             </CardDescription>
             </CardHeader>
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleSignup}>
             <CardContent className="grid gap-4">
                 <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
@@ -78,12 +82,12 @@ export default function LoginPage() {
             </CardContent>
             <CardFooter className="flex flex-col gap-4">
                 <Button type="submit" className="w-full" disabled={loading}>
-                 {loading ? 'Signing in...' : 'Sign in'}
+                 {loading ? 'Creating account...' : 'Sign Up'}
                 </Button>
                  <div className="text-center text-sm text-muted-foreground">
-                    Don&apos;t have an account?{' '}
-                    <Link href="/signup" className="underline">
-                        Sign up
+                    Already have an account?{' '}
+                    <Link href="/login" className="underline">
+                        Sign in
                     </Link>
                 </div>
             </CardFooter>

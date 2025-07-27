@@ -19,16 +19,37 @@ import {
   Activity,
   Terminal,
   LogOut,
-  Users,
-  Mail,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import { useAuth } from "@/hooks/use-auth"
+import { useRouter } from "next/navigation"
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const isActive = (path: string) => pathname === path
+  const { user, loading, logout } = useAuth()
+  const router = useRouter()
+
+  React.useEffect(() => {
+    if (!loading && !user) {
+      router.push('/login')
+    }
+  }, [user, loading, router])
+
+  if (loading || !user) {
+    return (
+        <div className="flex h-screen items-center justify-center">
+            <div className="h-16 w-16 animate-spin rounded-full border-4 border-solid border-primary border-t-transparent"></div>
+        </div>
+    )
+  }
+
+  const handleLogout = async () => {
+    await logout()
+    router.push('/login')
+  }
 
   return (
     <SidebarProvider>
@@ -110,11 +131,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </SidebarMenu>
         </SidebarContent>
         <SidebarHeader className="mt-auto">
-           <Link href="/login">
-            <SidebarMenuButton icon={<LogOut />}>
+            <SidebarMenuButton icon={<LogOut />} onClick={handleLogout}>
               Logout
             </SidebarMenuButton>
-           </Link>
         </SidebarHeader>
       </Sidebar>
       <SidebarInset>
