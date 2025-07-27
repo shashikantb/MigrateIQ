@@ -24,7 +24,7 @@ export default function AboutPage() {
                 <div className="flex flex-col items-center text-center gap-4">
                   <Avatar className="h-32 w-32">
                     <AvatarImage asChild>
-                      <Image src="/images/shashikant.png" alt="Shashikant Pradip Borgavakar" width={128} height={128} />
+                      <Image src="/shashikant.png" alt="Shashikant Pradip Borgavakar" width={128} height={128} />
                     </AvatarImage>
                     <AvatarFallback>SPB</AvatarFallback>
                   </Avatar>
@@ -39,7 +39,7 @@ export default function AboutPage() {
                 <div className="flex flex-col items-center text-center gap-4">
                   <Avatar className="h-32 w-32">
                     <AvatarImage asChild>
-                      <Image src="/images/akshay.png" alt="Akshay Ghadge" width={128} height={128} />
+                      <Image src="/akshay.png" alt="Akshay Ghadge" width={128} height={128} />
                     </AvatarImage>
                     <AvatarFallback>AG</AvatarFallback>
                   </Avatar>
@@ -54,7 +54,7 @@ export default function AboutPage() {
                 <div className="flex flex-col items-center text-center gap-4">
                   <Avatar className="h-32 w-32">
                      <AvatarImage asChild>
-                      <Image src="/images/ayon.png" alt="Ayon Sarkar" width={128} height={128} />
+                      <Image src="/ayon.png" alt="Ayon Sarkar" width={128} height={128} />
                     </AvatarImage>
                     <AvatarFallback>AS</AvatarFallback>
                   </Avatar>
