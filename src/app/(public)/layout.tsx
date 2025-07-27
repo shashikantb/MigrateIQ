@@ -15,6 +15,9 @@ export default function PublicLayout({
             <span className="ml-2 text-lg font-bold">MigrateIQ</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
+          <Link href="/" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            Home
+          </Link>
           <Link href="/about" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             About Us
           </Link>

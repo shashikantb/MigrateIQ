@@ -19,13 +19,13 @@ export default function Home() {
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
               <Link href="/login">
                 <Button size="lg">
-                  Start Migration
+                  Get Started
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
                <Link href="/page">
                 <Button size="lg" variant="secondary">
-                  View Projects
+                  View Demo
                 </Button>
               </Link>
             </div>
