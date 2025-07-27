@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { Code, Copy, Terminal, ToyBrick } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
+import Link from 'next/link'
 
 type Project = {
   id: string;
