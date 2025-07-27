@@ -18,7 +18,7 @@ export default function AboutPage() {
 
           <div className="space-y-4">
             <h3 className="text-xl font-semibold font-headline">Our Founders</h3>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="flex items-start gap-4">
                 <Avatar className="h-24 w-24">
                   <AvatarImage src="https://placehold.co/400x400.png" data-ai-hint="man portrait" alt="Shashikant Pradip Borgavakar" />
@@ -42,6 +42,19 @@ export default function AboutPage() {
                   <p className="text-muted-foreground">Co-Founder & CTO</p>
                   <p className="mt-2 text-sm">
                     Akshay is a technology enthusiast with a deep expertise in modern application development and cloud infrastructure. He is the architect behind MigrateIQ's robust and scalable platform, ensuring technical excellence and innovation.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <Avatar className="h-24 w-24">
+                  <AvatarImage src="https://placehold.co/400x400.png" data-ai-hint="man portrait" alt="Ayon Sarkar" />
+                  <AvatarFallback>AS</AvatarFallback>
+                </Avatar>
+                <div>
+                  <h4 className="font-bold text-lg">Ayon Sarkar</h4>
+                  <p className="text-muted-foreground">Co-Founder & COO</p>
+                  <p className="mt-2 text-sm">
+                    Ayon brings operational excellence and strategic vision to the team. His focus on process optimization and customer success ensures that MigrateIQ delivers a world-class experience from start to finish.
                   </p>
                 </div>
               </div>
