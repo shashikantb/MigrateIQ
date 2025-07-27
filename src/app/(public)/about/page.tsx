@@ -22,7 +22,7 @@ export default function AboutPage() {
               <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 <div className="flex flex-col items-center text-center gap-4">
                   <Avatar className="h-32 w-32">
-                    <AvatarImage src="https://placehold.co/400x400.png" data-ai-hint="man portrait" alt="Shashikant Pradip Borgavakar" />
+                    <AvatarImage src="/images/shashikant.png" alt="Shashikant Pradip Borgavakar" />
                     <AvatarFallback>SPB</AvatarFallback>
                   </Avatar>
                   <div>
@@ -35,7 +35,7 @@ export default function AboutPage() {
                 </div>
                 <div className="flex flex-col items-center text-center gap-4">
                   <Avatar className="h-32 w-32">
-                    <AvatarImage src="https://placehold.co/400x400.png" data-ai-hint="man portrait" alt="Akshay Ghadge" />
+                    <AvatarImage src="/images/akshay.png" alt="Akshay Ghadge" />
                     <AvatarFallback>AG</AvatarFallback>
                   </Avatar>
                   <div>
@@ -48,7 +48,7 @@ export default function AboutPage() {
                 </div>
                 <div className="flex flex-col items-center text-center gap-4">
                   <Avatar className="h-32 w-32">
-                    <AvatarImage src="https://placehold.co/400x400.png" data-ai-hint="man portrait" alt="Ayon Sarkar" />
+                    <AvatarImage src="/images/ayon.png" alt="Ayon Sarkar" />
                     <AvatarFallback>AS</AvatarFallback>
                   </Avatar>
                   <div>
