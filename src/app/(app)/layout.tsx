@@ -42,9 +42,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <SidebarContent>
           <SidebarMenu>
             <SidebarMenuItem>
-              <Link href="/page">
+              <Link href="/dashboard">
                 <SidebarMenuButton
-                  isActive={isActive('/page')}
+                  isActive={isActive('/dashboard')}
                   tooltip="Dashboard"
                   icon={<LayoutDashboard />}
                 >
